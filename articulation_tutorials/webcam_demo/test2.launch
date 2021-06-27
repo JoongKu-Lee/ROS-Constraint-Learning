@@ -1,0 +1,21 @@
+<launch>
+
+  <group ns="camera" clear_params="true">
+
+    <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node" output="screen">
+    <param name="device" type="string" value="/dev/video6"/>
+    <param name="width"  type="int" value="1280"/>
+    <param name="height" type="int" value="720"/>
+    <param name="fps" type="int" value="30"/>
+    <param name="auto_focus" type="bool" value="True" />
+    <param name="focus_absolute" type="int" value="0" />
+
+  </node>
+
+    <node name="image_proc" pkg="image_proc" type="image_proc" output="screen"/>
+    
+    <!-- <node name="pose_visualizer" pkg="checkerboard_detector" type="pose_visualizer.py" output="screen"/> -->
+
+  </group>
+
+</launch>

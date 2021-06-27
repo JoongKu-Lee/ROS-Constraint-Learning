@@ -1,0 +1,59 @@
+<launch>
+
+  <group ns="camera" clear_params="true">
+
+    <node name="uvc_camera" pkg="uvc_camera" type="uvc_camera_node" output="screen">
+    <param name="device" type="string" value="/dev/video6"/>
+    <param name="width"  type="int" value="1280"/>
+    <param name="height" type="int" value="720"/>
+    <param name="fps" type="int" value="10"/>
+    <param name="auto_focus" type="bool" value="True" />
+    <param name="focus_absolute" type="int" value="0" />
+
+  </node>
+
+    <node name="image_proc" pkg="image_proc" type="image_proc" output="screen"/>
+    
+    <!-- <node name="pose_visualizer" pkg="checkerboard_detector" type="pose_visualizer.py" output="screen"/> -->
+
+    <param name="display" type="int" value="1"/>
+    
+    <param name="board_type" value="chess" />
+    <!-- board0 -->
+    <param name="rect0_size_x" type="double" value="0.01"/>
+    <param name="rect0_size_y" type="double" value="0.01"/>
+    <param name="grid0_size_x" type="int" value="4"/>
+    <param name="grid0_size_y" type="int" value="6"/>
+    <param name="type0" type="string" value="4x6chessboard"/>
+
+    <!-- board1 -->
+    <param name="rect1_size_x" type="double" value="0.01"/>
+    <param name="rect1_size_y" type="double" value="0.01"/>
+    <param name="grid1_size_x" type="int" value="5"/>
+    <param name="grid1_size_y" type="int" value="7"/>
+    <param name="type1" type="string" value="5X7chessboard"/>
+    
+    <param name="use_P"              value="false" /> 
+
+    <node pkg="checkerboard_detector" type="checkerboard_detector" respawn="false" 
+        output="screen" name="checkerboard_detector">
+          <remap from="camera_info" to="/camera/camera_info"/>
+          <remap from="image" to="/camera/image_raw"/>
+
+    </node>
+  </group>
+
+  
+  <node name="articulation_collector" pkg="articulation_structure" type="articulation_collector.py" output="screen">
+    <param name="sigma_position" value="0.01"/>
+    <param name="sigma_orientation" value="0.3"/>
+    <param name="samples" value="50"/>
+  </node>
+  
+  <node name="structure_learner" pkg="articulation_structure" type="structure_learner" output="screen">
+    <param name="filter_models" value="rigid prismatic rotational"/>
+  </node>
+
+  <!-- <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find articulation_tutorials)/webcam_demo/webcam_demo.vcg" /> -->
+
+</launch>
