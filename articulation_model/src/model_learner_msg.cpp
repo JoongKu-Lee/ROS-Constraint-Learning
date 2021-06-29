@@ -31,8 +31,8 @@ map<string,	ros::Time> startingTime;
 map<string, vector<double> > measurements;
 
 ros::NodeHandle *nh;
-double sigma_position = 0.01;
-double sigma_orientation = 0.05*M_PI;
+double sigma_position = 0.01; // PRIOR PARAMETER (모집단 pos의 추정된 variance)
+double sigma_orientation = 0.01*M_PI; // PRIOR PARAMETER (모집단 orientation의 추정된 variance)
 
 
 void TIC(string name){
