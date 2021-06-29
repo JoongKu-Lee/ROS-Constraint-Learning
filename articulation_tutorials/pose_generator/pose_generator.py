@@ -7,7 +7,7 @@ from geometry_msgs.msg import Pose
 
 def talker():
     pub = rospy.Publisher('track',TrackMsg,queue_size=10)
-    rate = rospy.Rate(5) # LOOP RATE
+    rate = rospy.Rate(1) # LOOP RATE
     while not rospy.is_shutdown():
         track_msg.header.frame_id = ""
         track_msg.header.stamp = rospy.Time.now()

@@ -43,3 +43,6 @@
     * BIC 제일 작은걸 Model로 선정 후 이를 사용. 
 
     * Pose Generator Node를 활용해서 Prismatic, Rotational, Stationary Rotational Motion을 학습 한 결과, 모든 경우를 잘 구분하는 것을 확인할 수 있음. 
+
+    * Model Parameter 확인 - rostopic echo /model/param을 통해 확인할 수 있음. 
+        * rigid인 경우 rigid에 맞는 param, rot인 경우 rot에 맞는 param이 출력됨. 
