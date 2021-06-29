@@ -32,7 +32,7 @@ map<string, vector<double> > measurements;
 
 ros::NodeHandle *nh;
 double sigma_position = 0.01;
-double sigma_orientation = 4*M_PI;
+double sigma_orientation = 0.05*M_PI;
 
 
 void TIC(string name){
@@ -52,11 +52,11 @@ void ADD_DATA(string name,double data) {
 void EVAL() {
 	map<string, vector<double> >::iterator it;
 	for(it = measurements.begin(); it!=measurements.end(); it++) {
-		size_t n = it->second.size();
+		size_t n = it->second.size(); // NUMBER OF MEASUREMENTS
 		double sum = 0;
 		for(size_t i=0;i<n;i++) {
 			sum += it->second[i];
-		}
+		} // TOTAL NUMBER OF MEASUREMENTS
 		double mean = sum /n;
 		double vsum = 0;
 		for(size_t i=0;i<n;i++) {
@@ -72,14 +72,13 @@ void trackCallback(const TrackMsgConstPtr& track)
   ROS_INFO("Received track id [%d]", track->id);
 
   articulation_msgs::ModelMsg model_track;
-  model_track.track = *track;
+  model_track.track = *track; // COPY TRACK TO MODEL.TRACK!!
   setParamIfNotDefined(model_track.params, "sigma_position",
 			sigma_position, ParamMsg::PRIOR);
   setParamIfNotDefined(model_track.params, "sigma_orientation",
 			sigma_orientation, ParamMsg::PRIOR);
 
   TIC("createModels");
-
   GenericModelVector models_new = factory.createModels( model_track );
   TOC("createModels");
 

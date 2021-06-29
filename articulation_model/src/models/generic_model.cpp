@@ -724,14 +724,14 @@ bool GenericModel::sampleConsensus() {
 		if(!guessParameters()) continue;
 		goodGuess = true;
 		double likelihood = getLogLikelihood(true);
-//		cout <<"RANSAC iteration="<<it<<", likelihood="<<likelihood<<endl;
+		// cout <<"RANSAC iteration="<<it<<", likelihood="<<likelihood<<endl;
 		if(bestLikelihood < likelihood) {
 			writeParamsToModel();
 			bestParams = model.params;
 			bestLikelihood = likelihood;
 		}
 	}
-//	cout <<"RANSAC best likelihood="<<bestLikelihood<<endl;
+	// cout <<"RANSAC best likelihood="<<bestLikelihood<<endl;
 	model.params = bestParams;
 	readParamsFromModel();
 

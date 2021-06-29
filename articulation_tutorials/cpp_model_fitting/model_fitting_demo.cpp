@@ -38,13 +38,13 @@ int main(int argc, char** argv) {
 	MultiModelFactory factory;
 
 	ModelMsg model_msg;
-	model_msg.name = "rotational";
+	model_msg.name = "rotational"; // ONLY FINDS ROTATION!
 	ParamMsg sigma_param;
 	sigma_param.name = "sigma_position";
 	sigma_param.value = 0.02;
 	sigma_param.type = ParamMsg::PRIOR;
 	sigma_param.name = "sigma_orientation";
-	sigma_param.value = M_PI*10;
+	sigma_param.value = M_PI*10; // 10 * PI --> IGNORE ORIENTATION! 
 	sigma_param.type = ParamMsg::PRIOR;
 	model_msg.params.push_back(sigma_param);
 
