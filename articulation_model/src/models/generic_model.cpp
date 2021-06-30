@@ -698,7 +698,7 @@ double GenericModel::getLogLikelihood(bool estimate_outlier_ratio) {
 			diff = fabs(outlier_ratio - outlier_ratio_new);
 			iter++;
 			outlier_ratio = outlier_ratio_new;
-//			cout <<"EM iter="<<iter<<" outlier_ratio="<<outlier_ratio<<endl;
+			// cout <<"EM iter="<<iter<<" outlier_ratio="<<outlier_ratio<<endl;
 		} while( diff>0.01 && iter<10 );
 	} else {
 		for(size_t i=0;i<n;i++) {
@@ -731,7 +731,7 @@ bool GenericModel::sampleConsensus() {
 			bestLikelihood = likelihood;
 		}
 	}
-	// cout <<"RANSAC best likelihood="<<bestLikelihood<<endl;
+	cout <<"RANSAC best likelihood="<<bestLikelihood<<endl;
 	model.params = bestParams;
 	readParamsFromModel();
 

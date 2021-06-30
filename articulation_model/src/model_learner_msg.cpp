@@ -87,6 +87,7 @@ void trackCallback(const TrackMsgConstPtr& track)
   models_valid.clear();
   models_old.clear();
 
+  // MODELS_OLD를 clear 했는데, 이 밑 코드를 왜 사용하는거지?????????
   // update old models, then add valid
   for(size_t i=0;i<models_old.size();i++) {
 	  models_old[i]->setTrack(*track);
@@ -101,7 +102,7 @@ void trackCallback(const TrackMsgConstPtr& track)
   TIC("per_track");
   for(size_t i=0;i<models_new.size();i++) {
 	  TIC("fitModel" + models_new[i]->getModelName());
-	  if( !models_new[i]->fitModel() ) {
+	  if( !models_new[i]->fitModel()){
 		  if(DEBUG) cout <<"fitting of "<<models_new[i]->getModelName()<<" failed"<<endl;
 		  continue;
 	  }
